@@ -1,0 +1,34 @@
+import Card from "./Card.js";
+import {useEffect,useState} from "react";
+import axios from "axios";
+
+function Search() {
+    let [cakeresult,setCakes] = useState([])
+    let searchcakeapi = "https://apibyashu.herokuapp.com/api/searchcakes?q="+"alert"
+    useEffect(()=>{
+        axios({
+          method:"get",
+          url:searchcakeapi
+
+        }).then((response)=>{
+          console.log("Response from all cakes Api",response.data)
+          setCakes(response.data.data)
+        },(error)=>{
+          console.log("Error from cakes Api",error)
+        })
+    },[])
+    return (
+        <div className="container">
+        
+            <div className="row">
+              {cakeresult?.length >0 ? cakeresult.map((each,index)=>{
+                      return( <Card cakedata={each} key={index} />)
+                    }):<div className="alert alert-danger">No record found. Please try some other criteria</div> } 
+            </div>
+        </div>
+        
+    )
+}
+
+export default Search;
+    
