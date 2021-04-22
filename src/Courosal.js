@@ -1,5 +1,5 @@
 var img1 = "img.jpg";
-var img2 = "image4.jpeg";
+var img2 = "img1.jpg";
 var img3 = "image2.jpeg";
 
 var imgheightwidth = { 

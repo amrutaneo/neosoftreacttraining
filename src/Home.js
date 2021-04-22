@@ -1,7 +1,7 @@
 import Courosal from "./Courosal.js";
 import Card from "./Card.js";
 // import cakes from "./data.js";
-import CardDetail from "./CardDetail";
+import CakeDetails from "./CakeDetails";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -39,7 +39,7 @@ function Home(){
         <div>
             
             <Courosal />
-            <CardDetail/>
+            {/* <CardDetail/> */}
                 <div className="row" style={{margin:"5px"}}>
                     {/* <Card name="phone1" image={img1}/> */}
                     {/* <Card data={obj1}/>

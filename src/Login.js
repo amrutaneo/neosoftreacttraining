@@ -1,8 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link, withRouter } from "react-router-dom";
+import {connect} from "react-redux"
 
-function Login(){
+function Login(props){
+    console.log(">>>>>>>>>props of login",props)
     let [user,setUser] = useState([])
+
+    useEffect(()=>{
+       if(localStorage.token && localStorage.email){
+           props.history.push("/")
+       }
+    },[])
+
+
+    var [loginstatus,setloginStatus] = useState(false)
     let getEmail= (event)=>{
         setUser({
             ...user,
@@ -25,6 +37,20 @@ function Login(){
             data:user
         }).then((response)=>{
             console.log("Response from login Api",response.data)
+            // setloginStatus(true)
+            if(response.data.token){
+                localStorage.token = response.data.token
+                localStorage.email = response.data.email
+                // props.loginDone(user)
+                props.dispatch({
+                    type:"LOGIN",
+                    payload:response.data
+                })
+                // sessionStorage.setItem('token', JSON.stringify(userToken));
+                props.history.push("/")
+            } else {
+                alert("Invalid Credendials")
+            }
         },(error)=>{
             console.log("Error from login Api",error)
         })
@@ -46,6 +72,12 @@ function Login(){
             <div style={{color:"red"}}>
                 
             </div>
+            <div style={{float:"right"}}>
+            <Link to="/Forgot">Forgot password ?</Link>
+            </div>
+            <div>
+            <Link to="/Signup">New user? Click here</Link>
+            </div>
             <button class="btn btn-primary" onClick={login}>Login</button>
             
         {/* Hii user {this.state.onlineUsers}
@@ -57,4 +89,5 @@ function Login(){
     
 } 
 
-export default Login;
+Login = withRouter(Login)
+export default connect()(Login)

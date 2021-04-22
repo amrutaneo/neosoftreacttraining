@@ -1,11 +1,16 @@
 import Card from "./Card.js";
 import {useEffect,useState} from "react";
 import axios from "axios";
+import {useLocation} from "react-router-dom";
 
-function Search() {
+function Search(props) {
     let [cakeresult,setCakes] = useState([])
-    let searchcakeapi = "https://apibyashu.herokuapp.com/api/searchcakes?q="+"alert"
+    // let query = new URLSearchParams(useLocation().search);
+   
+
     useEffect(()=>{
+      let query = new URLSearchParams(props.location.search).get("query");
+      let searchcakeapi = "https://apibyashu.herokuapp.com/api/searchcakes?q="+query
         axios({
           method:"get",
           url:searchcakeapi
@@ -16,7 +21,7 @@ function Search() {
         },(error)=>{
           console.log("Error from cakes Api",error)
         })
-    },[])
+    },[props])
     return (
         <div className="container">
         
