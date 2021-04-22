@@ -45,31 +45,11 @@ function Navbar(props){
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                <li className="nav-item active">
-                    <a className="nav-link" >Home <span className="sr-only">(current)</span></a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" >Link</a>
-                </li>
-                <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                    </a>
-                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a className="dropdown-item" >Action</a>
-                    <a className="dropdown-item" >Another action</a>
-                    <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" >Something else here</a>
-                    </div>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link disabled"  tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={getSearchText}></input>
                 <Link to={"/search?query="+searchText}><button type="submit" style={buttonstyle}><FontAwesomeIcon icon={faSearch}/></button></Link>
-                {props.loginStatus && <Link to={"/cart"}><button style={buttonstyle}><FontAwesomeIcon icon={ faShoppingCart }/></button></Link>}
+    {props.loginStatus && <Link to={"/cart"}><button style={buttonstyle}><FontAwesomeIcon icon={ faShoppingCart }/>{props.cart?.length}</button></Link>}
                 {props.loginStatus ? <div><button onClick={logout} style={buttonstyle}><FontAwesomeIcon icon={faSignOutAlt}/></button></div> :
                 <Link to="/login"><div><button style={buttonstyle}><FontAwesomeIcon icon={faSignInAlt}/></button></div></Link>}
                 </form>
@@ -82,7 +62,8 @@ function Navbar(props){
 export default connect(function(state,props){
     return {
         user: state?.user?.name,
-        loginStatus: state?.isLogin
+        loginStatus: state?.isLogin,
+        cart:state?.cart
 
     }
 })(Navbar)

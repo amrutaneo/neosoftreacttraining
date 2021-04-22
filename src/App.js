@@ -8,6 +8,8 @@ import Search from "./Search";
 import CakeDetails from "./CakeDetails"
 import Cart from './Cart'
 import Checkout from './Checkout'
+import ForgotPassword from "./ForgotPassword"
+
 import { BrowserRouter as Router,
   Switch,
   Route,
@@ -69,6 +71,7 @@ function App(props) {
       <Route path="/cake/:cakeid" exact component={CakeDetails} />
       <Route path="/cart" exact component={Cart} />
       <Route path="/checkout" component={Checkout} />
+      <Route path="/forgot-password" component={ForgotPassword} />
 
       <Route path="/*" >
         <Redirect to="/" ></Redirect>

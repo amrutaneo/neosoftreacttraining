@@ -44,6 +44,7 @@ function CakeDetails(props) {
   let params = useParams();
   var token = localStorage.token
   console.log(params.cakeid);
+  
   const [cakedata, setCakes] = useState();
   useEffect(() => {
     let apiurl = "https://apibyashu.herokuapp.com/api/cake/" + params.cakeid;
@@ -59,33 +60,37 @@ function CakeDetails(props) {
   }, []);
 
   let addToCart = function(){
-    let url = "https://apibyashu.herokuapp.com/api/addcaketocart"
-    console.log(cakedata.cakeid,cakedata.name,cakedata.image,cakedata.price,cakedata.weight)
-    axios({
-        url:url,
-        method:"post",
-        headers:{
-          authtoken:token
-        },
-        data:{
-          cakeid:cakedata.cakeid,
-          name:cakedata.name,
-          image:cakedata.image,
-          price:cakedata.price,
-          weight:cakedata.weight
-        }
-        
-    }).then((response)=>{
-        console.log("Response from add cart Api",response.data)
-        props.dispatch({
-          type:"ADD_TO_CART",
-          payload:response.data.data
+    if(!props.token) {
+      alert("Login please..!")
+    } else {
+      let url = "https://apibyashu.herokuapp.com/api/addcaketocart"
+      console.log(cakedata.cakeid,cakedata.name,cakedata.image,cakedata.price,cakedata.weight)
+      axios({
+          url:url,
+          method:"post",
+          headers:{
+            authtoken:token
+          },
+          data:{
+            cakeid:cakedata.cakeid,
+            name:cakedata.name,
+            image:cakedata.image,
+            price:cakedata.price,
+            weight:cakedata.weight
+          }
+          
+      }).then((response)=>{
+          console.log("Response from add cart Api",response.data)
+          
+          props.dispatch({
+            type:"ADD_TO_CART",
+            payload:response.data.data
+        })
+          
+      },(error)=>{
+          console.log("Error from cart Api",error)
       })
-        
-    },(error)=>{
-        console.log("Error from cart Api",error)
-    })
-
+    }
   }
 
   return (
@@ -136,4 +141,8 @@ function CakeDetails(props) {
   );
 }
 
-export default connect()(CakeDetails);
+export default connect(function(state,props){
+  return { 
+  token:state?.user?.token
+  }
+})(CakeDetails);
