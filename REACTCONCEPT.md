@@ -150,7 +150,31 @@ React has the same events as HTML: click, change, mouseover etc.
 
 https://www.w3schools.com/react/react_events.asp
 
-### 11.
+### 11. Arrow functions
+Arrow functions allow us to write shorter function syntax:
+
+    getEmail = function (event){
+        this.user.email = event.target.value
+    }
+
+    getEmail = (event)=>{
+        this.user.email = event.target.value
+    }
+
+It gets shorter! If the function has only one statement, and the statement returns a value, you can remove the brackets and the return keyword:
+
+    getEmail = (event)=> return this.user.email = event.target.value
+
+
+### 12 this operator
+**The handling of this is also different in arrow functions compared to regular functions.**
+
+In short, with arrow functions there are no binding of this.
+
+In regular functions the this keyword represented the object that called the function, which could be the window, the document, a button or whatever.
+
+With arrow functions the this keyword always represents the object that defined the arrow function.
+
  
  
  
