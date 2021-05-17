@@ -110,7 +110,8 @@ https://reactjs.org/docs/higher-order-components.html#:~:text=A%20higher%2Dorder
 
 Data binding in React can be achieved by using a controlled input. A controlled input is achieved by binding the value to a state variable and a onChange event to change the state as the input value changes.
 https://stackoverflow.com/questions/42217579/data-binding-in-react#:~:text=Data%20binding%20in%20React%20can,as%20the%20input%20value%20changes.
-6.Synthetic event in React JS
+
+### 6.Synthetic event in React JS
 An event is an action that could be triggered as a result of the user action or system generated event. For example, a mouse click, loading of a web page, pressing a key, window resizes, and other interactions are called events.
 React has its own event handling system which is very similar to handling events on DOM elements. The react event handling system is known as Synthetic Events. The synthetic event is a cross-browser wrapper of the browser's native event.
 https://www.javatpoint.com/react-events
