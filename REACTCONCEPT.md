@@ -60,7 +60,7 @@ The HTML you write is parsed by the browser and turned into the DOM. The DOM rep
 In React, for every DOM object, there is a corresponding “virtual DOM object.” A virtual DOM object is a representation of a DOM object, like a lightweight copy.A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen.
 
 
-## Interview Questions (11-05-2021)
+##  `Interview Questions (11-05-2021)`
 ### 1.React JS vs Angular
 
 AngularJS is a structural framework for developing dynamic web apps, whereas React is a javascript library that allows you to build UI components.
@@ -178,6 +178,97 @@ In short, with arrow functions there are no binding of this.
 In regular functions the this keyword represented the object that called the function, which could be the window, the document, a button or whatever.
 
 With arrow functions the this keyword always represents the object that defined the arrow function.
+
+## `React Routing`
+
+React Router is a standard library for routing in React. It enables the navigation among views of various components in a React Application, allows changing the browser URL, and keeps the UI in sync with the URL.
+
+**`Installing React Router:`**
+    npm install react-router-dom –save
+
+**`After installing react-router-dom, add its components to your React application.`**
+
+Adding React Router Components: 
+The main Components of React Router are:
+
+**`BrowserRouter:`**
+
+BrowserRouter is a router implementation that uses the HTML5 history API(pushState, replaceState and the popstate event) to keep your UI in sync with the URL. It is the parent component that is used to store all of the other components.
+
+**`Route:`**
+
+Route is the conditionally shown component that renders some UI when its path matches the current URL.
+
+**`Link:`** 
+
+Link component is used to create links to different routes and implement navigation around the application. It works like HTML anchor tag.
+
+**`Switch:`**
+Switch component is used to render only the first route that matches the location rather than rendering all matching routes. Although there is no defying functionality of SWITCH tag in our application because none of the LINK paths are ever going to coincide. But let’s say we have a route (Note that there is no EXACT in here), then all the Route tags are going to be processed which start with ‘/’ (all Routes start with /). This is where we need SWITCH statement to process only one of the statements.
+
+**To add React Router components in your application, open your project directory in the editor you use and go to app.js file. Now, add the below given code in app.js.**
+    import {
+        BrowserRouter as Router,
+        Route,
+        Link,
+        Switch
+    } from 'react-router-dom';
+
+**BrowserRouter: Add BrowserRouter aliased as Router to your app.js file in order to wrap all the other components. BrowserRouter is a parent component and can have only single child.**
+
+**Route: Route component will now help us to establish the link between component’s UI and the URL. To include routes to the application, add the code give below to your app.js.**
+    <Router>
+        <div>
+            <Route path="/" exact component={Home} />
+            <Route path="/login" exact ><Login/></Route>
+            <Route path="/signup" exact component={Signup} />
+            <Route path="/search" exact component={Search} />
+            <Route path="/cake/:cakeid" exact component={CakeDetails} />
+            <Route path="/cart" exact component={Cart} />
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+        </div>
+    </Router>
+
+**Link: Let us now create links to our components. Link component uses the to prop to describe the location where the links should navigate to.**
+     <Link to="/"><a className="navbar-brand">My cakeshop</a></Link>
+
+
+### The props associated with the Route component.
+**1.exact:**
+It is used to match the exact value with the URL. For Eg., exact path=’/about’ will only render the component if it exactly matches the path but if we remove exact from the syntax, then UI will still be rendered even if the strucute is like /cake/345676.
+
+**2. path:**
+Path specifies a pathname we assign to our component.
+
+**3. component:**
+It refers to the component which will render on matching the path.
+
+**Switch:**
+To render a single component, wrap all the routes inside the Switch Component.
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/login" exact ><Login/></Route>
+      <Route path="/signup" exact component={Signup} />
+      <Route path="/search" exact component={Search} />
+      <Route path="/cake/:cakeid" exact component={CakeDetails} />
+      <Route path="/cart" exact component={Cart} />
+      <Route path="/checkout" component={Checkout} />
+      <Route path="/forgot-password" component={ForgotPassword} />
+    </Switch>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  
  
