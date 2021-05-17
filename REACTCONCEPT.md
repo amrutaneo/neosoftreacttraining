@@ -154,7 +154,7 @@ https://www.w3schools.com/react/react_events.asp
 Arrow functions allow us to write shorter function syntax:
 
     getEmail = function (event){
-        this.user.email = event.target.value
+        email = event.target.value
     }
 
     getEmail = (event)=>{
