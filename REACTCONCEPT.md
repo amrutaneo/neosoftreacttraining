@@ -204,9 +204,11 @@ Route is the conditionally shown component that renders some UI when its path ma
 Link component is used to create links to different routes and implement navigation around the application. It works like HTML anchor tag.
 
 **`Switch:`**
+
 Switch component is used to render only the first route that matches the location rather than rendering all matching routes. Although there is no defying functionality of SWITCH tag in our application because none of the LINK paths are ever going to coincide. But let’s say we have a route (Note that there is no EXACT in here), then all the Route tags are going to be processed which start with ‘/’ (all Routes start with /). This is where we need SWITCH statement to process only one of the statements.
 
 **To add React Router components in your application, open your project directory in the editor you use and go to app.js file. Now, add the below given code in app.js.**
+
     import {
         BrowserRouter as Router,
         Route,
@@ -217,6 +219,7 @@ Switch component is used to render only the first route that matches the locatio
 **BrowserRouter: Add BrowserRouter aliased as Router to your app.js file in order to wrap all the other components. BrowserRouter is a parent component and can have only single child.**
 
 **Route: Route component will now help us to establish the link between component’s UI and the URL. To include routes to the application, add the code give below to your app.js.**
+
     <Router>
         <div>
             <Route path="/" exact component={Home} />
@@ -231,7 +234,8 @@ Switch component is used to render only the first route that matches the locatio
     </Router>
 
 **Link: Let us now create links to our components. Link component uses the to prop to describe the location where the links should navigate to.**
-     <Link to="/"><a className="navbar-brand">My cakeshop</a></Link>
+
+    <Link to="/"><a className="navbar-brand">My cakeshop</a></Link>
 
 
 ### The props associated with the Route component.
@@ -246,6 +250,7 @@ It refers to the component which will render on matching the path.
 
 **Switch:**
 To render a single component, wrap all the routes inside the Switch Component.
+
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/login" exact ><Login/></Route>
