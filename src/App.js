@@ -1,5 +1,5 @@
-
 import './App.css';
+import React,{Suspense} from "react"
 import Navbar from "./Navbar.js";
 import Home from "./Home.js";
 import Signup from "./Signup";
@@ -9,6 +9,7 @@ import CakeDetails from "./CakeDetails"
 import Cart from './Cart'
 import Checkout from './Checkout'
 import ForgotPassword from "./ForgotPassword"
+
 
 import { BrowserRouter as Router,
   Switch,
@@ -20,13 +21,15 @@ import axios from 'axios';
 import {connect} from "react-redux"
 
 
+var suspendAdmin = React.lazy(()=>import('./Admin.js'))
+
 function App(props) {
   // var [user,setUser] = useState()
   // var [loginstatus,setloginStatus] = useState(false)
   useEffect(() => {
     if(localStorage.token && !props.user){
       var token = localStorage.token
-      let url = "https://apibyashu.herokuapp.com/api/getuserdetails"
+      let url = process.env.REACT_APP_BASE_URL+"getuserdetails"
           axios({
               url:url,
               method:"get",
@@ -72,7 +75,11 @@ function App(props) {
       <Route path="/cart" exact component={Cart} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/forgot-password" component={ForgotPassword} />
-
+      <Route path="/admin" exact>
+        <Suspense fallback={<div>Loading..</div>}>
+        <suspendAdmin/>
+        </Suspense>
+      </Route>
       <Route path="/*" >
         <Redirect to="/" ></Redirect>
       </Route>

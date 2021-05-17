@@ -7,18 +7,8 @@ import {connect} from "react-redux"
 var cake = "/product17.jpg";
 
 
-const rcorners2 = {
-  borderRadius: "15px 50px 30px",
-  background: "#F5F5F5",
-  border: "2px solid gray",
-  padding: "20px",
-  width: "100%",
-  height: "100%",
-  margin:"20px"
-} 
-
 const rcorners = {
-  borderRadius:  "15px 50px 30px 5px",
+  borderRadius:  "20px 20px 20px 20px",
   background: "#F5F5F5",
   border: "1px solid gray",
   height: "400px", 
@@ -47,7 +37,7 @@ function CakeDetails(props) {
   
   const [cakedata, setCakes] = useState();
   useEffect(() => {
-    let apiurl = "https://apibyashu.herokuapp.com/api/cake/" + params.cakeid;
+    let apiurl = process.env.REACT_APP_BASE_URL+"cake/" + params.cakeid;
     axios({
       url: apiurl,
       method: "get",
@@ -63,7 +53,7 @@ function CakeDetails(props) {
     if(!props.token) {
       alert("Login please..!")
     } else {
-      let url = "https://apibyashu.herokuapp.com/api/addcaketocart"
+      let url = "https://apifromashu.herokuapp.com/api/addcaketocart"
       console.log(cakedata.cakeid,cakedata.name,cakedata.image,cakedata.price,cakedata.weight)
       axios({
           url:url,
@@ -94,48 +84,55 @@ function CakeDetails(props) {
   }
 
   return (
-    <div >
-        <div className="row" >
+    <div>
+      <div className="row" >
         <div className="col-md-2"></div>
-        <div className="col-md-8 container">
-        
-          <div className="row" style={rcorners2}>
-          
-          <div className="col-md-5">
-           
-          <img
-            style={rcorners}
-            src={cakedata?.image || cake}
-          />
-        </div>
-          <div className="col-md-7">
-            <h2>
-              {cakedata?.name}
-            </h2>
+        <div className="col-md-8">
 
-            <br></br>
-            <p>{cakedata?.ratings} *</p>
-            <p>{cakedata?.reviews} Reviews</p>
-            <p style={{ wordBreak: "break-all" }}>{cakedata?.description}</p>
-            <h5> PRICE:{" "}
-              <span> {cakedata?.price} Rs</span>
-            </h5>
-            <p style={{ wordBreak: "break-all" }}>
-            </p>
-            {/* <h3>WEIGHT: {cakedata?.weight}</h3> */}
-            <h5>
-              FLAVOUR:{" "}
-              <span>
-                {cakedata?.flavour || "dumy"}
-              </span>
-            </h5>
-            <h5>TYPE : {cakedata?.type}</h5>
-            <button style={buttonstyle} onClick={addToCart}>Add to cart</button>
-            <button style={buttonstyle}><FontAwesomeIcon icon={ faHeart }/></button>
+          <div className="card mt-5">
+              <div className="card-header"> {cakedata?.name}
+              </div>
+              <div className="card-body">
+              <div className="row">
+  
+                  <div className="col-md-5">
+                    <img
+                      style={rcorners}
+                      src={cakedata?.image || cake}
+                    />
+                  </div>
+                  <div className="col-md-7">
+                    <h2>
+                      {cakedata?.name}
+                    </h2>
+
+                    <br></br>
+                    <p>{cakedata?.ratings} *</p>
+                    <p>{cakedata?.reviews} Reviews</p>
+                    <p style={{ wordBreak: "break-all" }}>{cakedata?.description}</p>
+                    <h5> PRICE:{" "}
+                      <span> {cakedata?.price} Rs</span>
+                    </h5>
+                    <p style={{ wordBreak: "break-all" }}>
+                    </p>
+                    {/* <h3>WEIGHT: {cakedata?.weight}</h3> */}
+                    <h5>
+                      FLAVOUR:{" "}
+                      <span>
+                        {cakedata?.flavour || "dumy"}
+                      </span>
+                    </h5>
+                    <h5>TYPE : {cakedata?.type}</h5>
+                    <button style={buttonstyle} onClick={addToCart}>Add to cart</button>
+                    <button style={buttonstyle}><FontAwesomeIcon icon={ faHeart }/></button>
+                  </div>
+                  </div>
+                
+                
+              </div>
           </div>
         </div>
-      </div>
-      <div className="col-md-2"></div>
+        <div className="col-md-2"></div>
       </div>
     </div>
   );

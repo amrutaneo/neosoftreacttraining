@@ -3,35 +3,11 @@ import { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import {connect} from "react-redux"
 
-const buttonstyle1= {
-    backgroundColor:  "#008CBA",
-    border: "none",
-    color: "white",
-    padding: "12px 25px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "inlineBlock",
-    fontSize: "16px",
-    margin: "10px 2px",
-    cursor: "pointer",
-   
-}
 
-const navbutton= {
-    backgroundColor:  "gray",
-    border: "none",
-    color: "white",
-    padding: "15px 20px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "inlineBlock",
-    fontSize: "20px",
-    cursor: "pointer",
-    width:"660px",
-    marginTop:"30px",
-    marginBottom:"30px"
-   
-  }
+
+// axios.interceptors.request.use((config)=>{
+    
+// })
 
 function Login(props){
    
@@ -44,8 +20,6 @@ function Login(props){
            props.history.push("/")
        }
     },[])
-
-   
 
     var [loginstatus,setloginStatus] = useState(false)
     let getEmail= (event)=>{
@@ -91,7 +65,8 @@ function Login(props){
             setFormerrors(errors)
         } else {
             setFormerrors({})
-            let loginurl = "https://apibyashu.herokuapp.com/api/login"
+            let loginurl = process.env.REACT_APP_BASE_URL+"login"
+            
             axios({
                 url:loginurl,
                 method:"post",
@@ -119,37 +94,39 @@ function Login(props){
     }
     
     return (
-        <div style={{width:"50%",margin:"auto"}}>
-            <form id="loginForm">
-            <button style={navbutton}>Login</button>
-            <div className="form-group">
-                <label>Email</label>
-                <input type="email" className="form-control" name="email" onChange={getEmail}/>
-                <div className="form-error">{formerrors?.email && <div>{formerrors.email}</div>}</div>
-            </div>
-            
-            <div className="form-group">
-                <label>Password</label>
-                <input type="password" className="form-control" name="password" onChange={getPassword}/>
-                <div className="form-error">{formerrors?.password && <div>{formerrors.password}</div>}</div>
-            </div>
-            <div style={{color:"red"}}>
-                
-            </div>
-            <div style={{float:"right"}}>
-            <Link to="/forgot-password">Forgot password ?</Link>
-            </div>
-            <div>
-            <Link to="/Signup">New user? Click here</Link>
-            </div>
-            </form>
-            <button style={buttonstyle1} onClick={login}>Login</button>
-            
-        {/* Hii user {this.state.onlineUsers}
-        <input onChange={this.getEmail}></input>
-        <button onClick={this.goOnline}>Go online</button> */}
+        <div style={{width:"50%",margin:"auto"}} >
+            <div className="card mt-5">
+                <div className="card-header">Login
+                </div>
+                <div className="card-body">
+                    <form id="loginForm">
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input type="email" className="form-control" name="email" onChange={getEmail}/>
+                            <div className="form-error">{formerrors?.email && <div>{formerrors.email}</div>}</div>
+                        </div>
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input type="password" className="form-control" name="password" onChange={getPassword}/>
+                            <div className="form-error">{formerrors?.password && <div>{formerrors.password}</div>}</div>
+                        </div>
+           
+                        <div style={{float:"right"}}>
+                        <Link to="/forgot-password">Forgot password ?</Link>
+                        </div>
+                        <div>
+                        <Link to="/Signup">New user? Click here</Link>
+                        </div>
+                    </form>
+                <div style={{float:"right"}}>
+                    <button className="btn btn-primary" onClick={login}>Login</button>
+                </div>
+            </div> 
+        </div>
 
         </div>
+
+        
     )
     
 } 

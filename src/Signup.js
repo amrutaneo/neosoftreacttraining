@@ -1,35 +1,6 @@
 import {Component} from "react";
 import axios from "axios";
 
-const navbutton= {
-    backgroundColor:  "gray",
-    border: "none",
-    color: "white",
-    padding: "15px 20px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "inlineBlock",
-    fontSize: "20px",
-    cursor: "pointer",
-    width:"660px",
-    marginTop:"30px",
-    marginBottom:"30px"
-   
-  }
-
-  const buttonstyle1= {
-    backgroundColor:  "#008CBA",
-    border: "none",
-    color: "white",
-    padding: "12px 25px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "inlineBlock",
-    fontSize: "16px",
-    margin: "10px 2px",
-    cursor: "pointer",
-   
-}
 
 class Signup extends Component{
 
@@ -91,7 +62,7 @@ class Signup extends Component{
             })
 
         }else {
-            let apiurl = "https://apibyashu.herokuapp.com/api/register"
+            let apiurl = process.env.REACT_APP_BASE_URL+"register"
             axios({
                 url:apiurl,
                 method:"POST",
@@ -109,28 +80,33 @@ class Signup extends Component{
     render() {
         return (
             <div style={{width:"50%",margin:"auto"}}>
-                <form id="signupForm">
-                <button style={navbutton}>Signup</button>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control" name="email" onChange={this.getEmail}/>
-                    <div className="form-error">{this.state.formerrors?.email && <div>{this.state.formerrors.email}</div>}</div>
+                <div className="card mt-5">
+                    <div className="card-header">Signup
+                    </div>
+                    <div className="card-body">
+                        <form id="signupForm">
+                            <div className="form-group">
+                                <label>Email</label>
+                                <input type="email" className="form-control" name="email" onChange={this.getEmail}/>
+                                <div className="form-error">{this.state.formerrors?.email && <div>{this.state.formerrors.email}</div>}</div>
+                            </div>
+                            <div className="form-group">
+                                <label>Name</label>
+                                <input type="text" className="form-control" name="name" onChange={this.getName}/>
+                                <div className="form-error">{this.state.formerrors?.name && <div>{this.state.formerrors.name}</div>}</div>
+                            </div>
+                            <div className="form-group">
+                                <label>Password</label>
+                                <input type="password" className="form-control" name="password" onChange={this.getPassword}/>
+                                <div className="form-error">{this.state.formerrors?.password && <div>{this.state.formerrors.password}</div>}</div>
+                            </div>
+                            <div style={{color:"red"}}>
+                                {this.state.errorMessage}
+                            </div>
+                        </form>
+                        <button className="btn btn-primary" onClick={this.register}>Register</button>
+                    </div>
                 </div>
-                <div className="form-group">
-                    <label>Name</label>
-                    <input type="text" className="form-control" name="name" onChange={this.getName}/>
-                    <div className="form-error">{this.state.formerrors?.name && <div>{this.state.formerrors.name}</div>}</div>
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" name="password" onChange={this.getPassword}/>
-                    <div className="form-error">{this.state.formerrors?.password && <div>{this.state.formerrors.password}</div>}</div>
-                </div>
-                <div style={{color:"red"}}>
-                    {this.state.errorMessage}
-                </div>
-                </form>
-                <button style={buttonstyle1} onClick={this.register}>Register</button>
                
             {/* Hii user {this.state.onlineUsers}
             <input onChange={this.getEmail}></input>

@@ -19,7 +19,7 @@ var obj2= {
 }
 function Home(){
     let [cakes,setCakes] = useState([])
-    let allcakeapi = "https://apibyashu.herokuapp.com/api/allcakes"
+    let allcakeapi = process.env.REACT_APP_BASE_URL+"allcakes"
     
 
     useEffect(()=>{
@@ -28,7 +28,7 @@ function Home(){
           url:allcakeapi
 
         }).then((response)=>{
-          console.log("Response from all cakes Api",response.data)
+          console.log("Response from all cakes Api",response.data.data[0])
           setCakes(response.data.data)
         },(error)=>{
           console.log("Error from cakes Api",error)

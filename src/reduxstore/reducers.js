@@ -51,6 +51,16 @@ const demo = (state={
             return state;
         }
 
+        case "ADD_ADDRESS": {
+            state = { ...state };
+            state["name"]       = action.payload.name.value;
+            state["address"]    = action.payload.address.value;
+            state["city"]       = action.payload.city.value;
+            state["phone"]      = action.payload.phone.value;
+            state["pincode"]    = action.payload.pincode.value;        
+            return state;
+        }
+
 
         default: return state;
     }

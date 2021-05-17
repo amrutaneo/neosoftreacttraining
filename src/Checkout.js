@@ -6,10 +6,10 @@ import CartSummery from "./CartSummery";
 import {Link} from "react-router-dom"
 
 const sidenav = {
-    marginTop:"50px",
+    marginTop:"58px",
     height: "100%",
     width: "200px",
-    position: "fixed",
+    position: "absolute",
     zIndex: 1,
     top: 0,
     left: 0,

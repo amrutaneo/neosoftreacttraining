@@ -10,7 +10,7 @@ function Search(props) {
 
     useEffect(()=>{
       let query = new URLSearchParams(props.location.search).get("query");
-      let searchcakeapi = "https://apibyashu.herokuapp.com/api/searchcakes?q="+query
+      let searchcakeapi = process.env.REACT_APP_BASE_URL+"searchcakes?q="+query
         axios({
           method:"get",
           url:searchcakeapi

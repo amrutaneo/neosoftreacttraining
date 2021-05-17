@@ -3,35 +3,6 @@ import { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import {connect} from "react-redux"
 
-const buttonstyle1= {
-    backgroundColor:  "#008CBA",
-    border: "none",
-    color: "white",
-    padding: "12px 25px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "inlineBlock",
-    fontSize: "16px",
-    margin: "10px 2px",
-    cursor: "pointer",
-   
-}
-
-const navbutton= {
-    backgroundColor:  "gray",
-    border: "none",
-    color: "white",
-    padding: "15px 20px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "inlineBlock",
-    fontSize: "20px",
-    cursor: "pointer",
-    width:"660px",
-    marginTop:"30px",
-    marginBottom:"30px"
-   
-  }
 
 function ForgotPassword(props){
    
@@ -78,7 +49,7 @@ function ForgotPassword(props){
             setFormerrors(errors)
         } else {
             setFormerrors({})
-            let loginurl = "https://apibyashu.herokuapp.com/api/recoverpassword"
+            let loginurl = process.env.REACT_APP_BASE_URL+"recoverpassword"
             axios({
                 url:loginurl,
                 method:"post",
@@ -94,20 +65,21 @@ function ForgotPassword(props){
     
     return (
         <div style={{width:"50%",margin:"auto"}}>
-            <form id="form">
-                <button style={navbutton}>Forgot Password</button>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control" name="email" onChange={getEmail}/>
-                    <div className="form-error">{formerrors?.email && <div>{formerrors.email}</div>}</div>
+            <div className="card mt-5">
+                <div className="card-header">Forgot Password
                 </div>
-            </form>
-            <button style={buttonstyle1} onClick={forgotPassword}>Forgot Password</button>
-            
-        {/* Hii user {this.state.onlineUsers}
-        <input onChange={this.getEmail}></input>
-        <button onClick={this.goOnline}>Go online</button> */}
-
+                <div className="card-body">
+                    <form id="form">
+                        
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input type="email" className="form-control" name="email" onChange={getEmail}/>
+                            <div className="form-error">{formerrors?.email && <div>{formerrors.email}</div>}</div>
+                        </div>
+                    </form>
+                    <button className="btn btn-primary" onClick={forgotPassword}>Forgot Password</button>
+                </div> 
+            </div>
         </div>
     )
     
