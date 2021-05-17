@@ -119,6 +119,10 @@ https://www.javatpoint.com/react-events
 ### 7. How to create list of React component or html elements
 
 The following function component shows how to render a list of items (JS primitives). It would work the same with a list of numbers instead of strings. Since we can use JavaScript in JSX by using curly braces, we can use the built-in JavaScript array map method to iterate over our list items; and to map them from JavaScript primitive to HTML elements. Each element receives a mandatory key prop:
+
+    {cakes?.length >0 && cakes.map((each,index)=>{
+        return( <Card cakedata={each} key={index} />)
+    }) } 
 https://www.robinwieruch.de/react-list-component 
 
 ### 8. Higher Order Component and purpose of higher order component.
