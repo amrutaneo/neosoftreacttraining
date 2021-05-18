@@ -93,9 +93,18 @@ function Cart(props){
             payload:cakeid,
             price: price 
         })
+        alert("Cake is removed from cart..!")
       },(error)=>{
         console.log("Error from login Api",error)
       })
+    }
+
+    let checkout = function(){
+      props.dispatch({
+        type:"CHECKOUT",
+        payload:{}
+      })
+      props.history.push("/checkout")
     }
     
     return (
@@ -128,9 +137,10 @@ function Cart(props){
             <div style={{float:"left"}}>
             <h5>Total:{props.total}</h5>
             </div>
-            <div style={{float:"right"}}>
-              <Link to={"/checkout"}><button className="btn btn-primary">Checkout</button></Link>
-            </div>
+
+            {props.cart?.length >0 && <div style={{float:"right"}}>
+            <button className="btn btn-primary" onClick={checkout}>Checkout</button>
+            </div>}
            
         </div>
       </div>

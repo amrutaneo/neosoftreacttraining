@@ -3,7 +3,8 @@ import Address from "./Address";
 import Payment from "./Payment";
 import Orders from "./Orders";
 import CartSummery from "./CartSummery";
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
+import {connect} from "react-redux"
 
 const sidenav = {
     marginTop:"58px",
@@ -30,17 +31,27 @@ const sidenav = {
   
 
   
-function Checkout() {
+function Checkout(props) {
     var route = useRouteMatch()
     var url = route.url;
     var path = route.path;
+    console.log("props.stage",props.stage)
     return (
     <div className="row">
         <div className="col-md-4" style={sidenav}>
             <Link to={url}><div style={options}>Cart Summery</div></Link>
-            <Link to={url+"/address"}><div style={options}>Add Address</div></Link>
-            <Link to={url+"/payment"}><div style={options}>Payment</div></Link>
-            <Link to={url+"/orders"}><div style={options}>Order</div></Link>
+            {props.stage == 1 || props.stage == 2 ? (
+              <Link to={url+"/address"}><div style={options}>Add Address</div></Link>
+            ) : (
+                <Link to={url+"/address"}  style={{ cursor: "not-allowed" }}><div style={options}>Add Address</div></Link>
+            )}
+            {props.stage == 2 ? (
+                <Link to={url+"/payment"} ><div style={options}>Payment</div></Link>
+            ):(
+                <Link to={url+"/payment"} style={{ cursor: "not-allowed" }}><div style={options}>Payment</div></Link>
+            )}
+
+            <Link to={url+"/orders"} ><div style={options}>Order</div></Link>
         </div>
         <div className="col-md-6" style={{marginLeft:"200px"}}>
             <Route exact path={path} component={CartSummery}></Route>
@@ -52,4 +63,8 @@ function Checkout() {
     </div>)
 }
 
-export default Checkout
+export default connect(function(state,props){
+    return {
+        stage: state?.stage
+    }
+})(Checkout)

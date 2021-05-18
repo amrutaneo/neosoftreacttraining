@@ -7,9 +7,17 @@ import { faShoppingCart, faSignOutAlt, faSearch , faSignInAlt} from '@fortawesom
 
 
 const buttonstyle = {
+  
     background: "transparent",
     boxShadow: "0px 0px 0px transparent",
     border: "0px solid transparent",
+    textShadow: "0px 0px 0px transparent",
+    margin:"8px"
+  };
+  const buttonstylecart = {
+    border: "1px solid black",
+    background: "transparent",
+    boxShadow: "0px 0px 0px transparent",
     textShadow: "0px 0px 0px transparent",
     margin:"8px"
   };
@@ -49,9 +57,9 @@ function Navbar(props){
                 <form className="form-inline my-2 my-lg-0">
                 <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" onChange={getSearchText}></input>
                 <Link to={"/search?query="+searchText}><button type="submit" style={buttonstyle}><FontAwesomeIcon icon={faSearch}/></button></Link>
-    {props.loginStatus && <Link to={"/cart"}><button style={buttonstyle}><FontAwesomeIcon icon={ faShoppingCart }/>{props.cart?.length}</button></Link>}
-                {props.loginStatus ? <div><button onClick={logout} style={buttonstyle}><FontAwesomeIcon icon={faSignOutAlt}/></button></div> :
-                <Link to="/login"><div><button style={buttonstyle}><FontAwesomeIcon icon={faSignInAlt}/></button></div></Link>}
+    {props.loginStatus && <Link to={"/cart"}><button style={buttonstylecart}><FontAwesomeIcon icon={ faShoppingCart }/>{props.cart?.length}</button></Link>}
+                {props.loginStatus ? <div><button onClick={logout} style={buttonstyle}>Logout  <FontAwesomeIcon icon={faSignOutAlt}/></button></div> :
+                <Link to="/login"><div><button style={buttonstyle}>Login  <FontAwesomeIcon icon={faSignInAlt}/></button></div></Link>}
                 </form>
             </div>
         </nav>

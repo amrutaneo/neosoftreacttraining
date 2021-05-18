@@ -17,19 +17,7 @@ const rcorners = {
   padding:"5px"
  
 }
-const buttonstyle= {
-  backgroundColor:  "#008CBA",
-  border: "none",
-  color: "white",
-  padding: "12px 25px",
-  textAlign: "center",
-  textDecoration: "none",
-  display: "inlineBlock",
-  fontSize: "16px",
-  margin: "10px 2px",
-  cursor: "pointer",
- 
-}
+
 function CakeDetails(props) {
   let params = useParams();
   var token = localStorage.token
@@ -76,6 +64,7 @@ function CakeDetails(props) {
             type:"ADD_TO_CART",
             payload:response.data.data
         })
+        alert("Cake is added to cart..!")
           
       },(error)=>{
           console.log("Error from cart Api",error)
@@ -123,8 +112,8 @@ function CakeDetails(props) {
                       </span>
                     </h5>
                     <h5>TYPE : {cakedata?.type}</h5>
-                    <button style={buttonstyle} onClick={addToCart}>Add to cart</button>
-                    <button style={buttonstyle}><FontAwesomeIcon icon={ faHeart }/></button>
+                    <button  className="btn btn-primary" onClick={addToCart}>Add to cart</button>
+                    <button className="btn btn-primary" style={{margin:"10px"}}><FontAwesomeIcon icon={ faHeart }/></button>
                   </div>
                   </div>
                 

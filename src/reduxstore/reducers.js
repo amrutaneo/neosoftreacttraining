@@ -1,6 +1,7 @@
 const demo = (state={
     user:null,
-    cart:[]
+    cart:[],
+    stage:1,
 }, action) => {
     switch (action.type) {
         case "LOGIN": {
@@ -33,7 +34,7 @@ const demo = (state={
             state = { ...state };
             state["cart"] = [...state.cart,action.payload];
             state["total"] = state.total + action.payload.price;
-            console.log("cart",state.cart)
+            state["stage"] = 1;
             return state;
         }
 
@@ -51,13 +52,20 @@ const demo = (state={
             return state;
         }
 
+        case "CHECKOUT": {    
+            state["stage"] = 1;   
+            return state;
+        }
+
+
         case "ADD_ADDRESS": {
             state = { ...state };
             state["name"]       = action.payload.name.value;
             state["address"]    = action.payload.address.value;
             state["city"]       = action.payload.city.value;
             state["phone"]      = action.payload.phone.value;
-            state["pincode"]    = action.payload.pincode.value;        
+            state["pincode"]    = action.payload.pincode.value;    
+            state["stage"] = 2;   
             return state;
         }
 
